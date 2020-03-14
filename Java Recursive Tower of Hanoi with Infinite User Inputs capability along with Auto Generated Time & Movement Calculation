@@ -1,0 +1,54 @@
+             
+          /** 
+           * Author: Masum The Great (মহামতি মাসুম) 
+           * ahmmasum98@gmai.com, fb.com/masum00000
+           * Program Info: This solution is a Java recursive 
+           * implementation of 'tower of hanoi' problem . It 
+           * allows the users to input infinite 'Number' of Disks 
+           * & then get the required 'Time' & 'Movement'  
+           *accordingly.
+           */ 
+import java.util.*;
+class TowersOfHanoi { //Recursive Function
+    public void solveTowersOfHanoi(double disks, String from_tower, String auxiliary_tower, String to_tower){ 
+        if(disks==0){   //If there is no Disks then no movement will happen 
+            return;
+        }
+
+        {
+            // If only 1 disk, make the move and return.
+            if(disks==1)
+            {
+                System.out.println(from_tower+"      ⫸      TO      ➨     "+to_tower);
+                return;
+            }
+
+            solveTowersOfHanoi(disks-1, from_tower, to_tower, auxiliary_tower); // Move top disks-1 Disks from A to B using C as auxiliary
+
+            System.out.println(from_tower+"     ⫸      TO     ➨      "+to_tower); //Move remaining Disks from A to C
+
+            solveTowersOfHanoi(disks-1, auxiliary_tower, from_tower, to_tower); // Move disks-1 Disks from B to C using A as auxiliary
+        }
+    }
+
+    public static void main(String args[])
+    {
+        TowersOfHanoi obj = new TowersOfHanoi();
+        System.out.printf("*** 1st Semister Project ***%nRecursive Tower of Hanoi solution with Infinite User Input & TIME Calculation.%nAuthor: A.H.M   MASUM%nCoordinator: MD. ABU AHMED BABU (Lecturer, C.S.E , B.U)%n %n*** ⚠️ Remember: More Disks '📀' Require More Time '⏱️' & %nResources '💾' . You should choice between ❶  To  ❶❺   ***%n");    
+        System.out.println("🤖 Q: Enter Number '🔢' of Disks :- .  .   .❔");    //User Input prompt will shown
+
+        Scanner s = new Scanner(System.in);
+        int disks = s.nextInt();
+        s.close();
+        System.out.println("ↆ  Move Disks as below illustration  ⤸");
+        obj.solveTowersOfHanoi(disks, "Ā   _┃_", "B̄   _┃_", "C̄   _┃_"); // Ā, B̄ & C̄  are the names of the 3 tower respectively
+
+        double formula_of_calculation  = Math.pow(2,disks); // Disk movement & time Calculation
+        double disk_movement= (formula_of_calculation-1);
+        double required_time= (disk_movement/60);
+        System.out.printf("%n⏱️  Required Time:  "+required_time +"  Minutes ⌛ ");
+        
+        int notFraction = (int)disk_movement; //Disk Movement can't be a Fraction
+        System.out.printf("%n♲  Required Move:  "  + notFraction);
+    }    
+}
